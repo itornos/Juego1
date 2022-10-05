@@ -64,6 +64,8 @@ public class Ascensor : MonoBehaviour
         }
     }
 
+    //hola
+
     void OnEnable()
     {
         controls.Gameplay.Enable();
