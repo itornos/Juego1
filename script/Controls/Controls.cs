@@ -10,7 +10,7 @@ public class Controls : MonoBehaviour
     GameObject a;
     GameObject b;
     GameObject y;
-    //Holaaaaaaa
+    //abcd
     GameObject FUp;
     GameObject FDown;
     GameObject FLeft;
