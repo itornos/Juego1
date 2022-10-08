@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class Salida : MonoBehaviour
 {
-    float distanciaX;
-    float distanciay;
-    float distanciaz;
-    private GameObject pj;
+    public GameObject pj;
     public key key;
+
+    public AudioSource sonidoPuerta;
     private Animator salidaA;
+    private bool repetir = true;
 
     // Start is called before the first frame update
     void Start()
@@ -20,24 +20,20 @@ public class Salida : MonoBehaviour
         salidaA = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if (key.recoger == 0) 
+        if (other.gameObject.Equals(pj) && repetir && key.recoger == 0) 
         {
             salidaA.SetInteger("Recogida", 0);
-            distanciaX = pj.transform.position.x - transform.position.x;
-            distanciay = pj.transform.position.y - transform.position.y;
-            distanciaz = pj.transform.position.z - transform.position.z;
-
-            if (distanciaX < 0) distanciaX = -distanciaX;
-            if (distanciaz < 0) distanciaz = -distanciaz;
-            if (distanciay < 0) distanciay = -distanciay;
-
-            if (distanciaX < 1.0f && distanciaz < 1.0f && distanciay < 1.0f)
-            {
-                SceneManager.LoadScene("Nivel2");
-            }
+            sonidoPuerta.Play();
+            StartCoroutine(LoadLevelAfterDelay());
+            repetir = false;
         }
+    }
+
+    IEnumerator LoadLevelAfterDelay()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Nivel2");
     }
 }

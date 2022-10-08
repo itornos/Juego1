@@ -8,6 +8,7 @@ public class Ascensor : MonoBehaviour
     private Animator putoAscensor;
     public GameObject pj;
     public GameObject boton;
+    public AudioSource sonidoAscensor;
     private float alturaBoton;
     private int dondeEstoy;
     private bool colision;
@@ -45,6 +46,7 @@ public class Ascensor : MonoBehaviour
                 putoAscensor.SetInteger("estado", dondeEstoy);
                 dondeEstoy = 0;   
             }
+            sonidoAscensor.Play();
         }  
     }
 
